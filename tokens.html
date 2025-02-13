@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Token Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+            background: #121212;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            justify-content: center;
+            position: relative;
+        }
+        body::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #ff0080, #7928ca);
+            opacity: 0.2;
+            z-index: -1;
+        }
+        textarea {
+            width: 80%;
+            height: 300px;
+            margin-top: 20px;
+            font-size: 16px;
+            background: #1e1e1e;
+            color: #ffffff;
+            border: 2px solid #ff0080;
+            border-radius: 12px;
+            padding: 10px;
+            outline: none;
+            resize: none;
+        }
+        button {
+            margin: 10px;
+            padding: 12px 24px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(45deg, #ff0080, #7928ca);
+            color: white;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: linear-gradient(45deg, #7928ca, #ff0080);
+        }
+    </style>
+</head>
+<body>
+    <h2>Random Token Generator</h2>
+    <button onclick="generateTokens()">Generate Tokens</button>
+    <button onclick="copyTokens()">Copy to Clipboard</button>
+    <br>
+    <textarea id="tokenOutput" readonly></textarea>
+
+    <script>
+        function generateToken(length = 8) {
+            const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            let token = "";
+            for (let i = 0; i < length; i++) {
+                token += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return token;
+        }
+
+        function generateTokens() {
+            let output = "";
+            for (let i = 0; i < 25; i++) {
+                output += `#token value=\"${generateToken()}\"\n`;
+            }
+            document.getElementById("tokenOutput").value = output;
+        }
+
+        function copyTokens() {
+            let textarea = document.getElementById("tokenOutput");
+            textarea.select();
+            document.execCommand("copy");
+            alert("Tokens copied to clipboard!");
+        }
+    </script>
+</body>
+</html>
