@@ -1,0 +1,78 @@
+<style>
+    .tata-navbar { background: #333; padding: 10px; text-align: center; width: 100%; display: flex; flex-wrap: wrap; justify-content: center; overflow-x: auto; }
+    .tata-navbar a { color: white; margin: 5px 10px; text-decoration: none; font-size: 16px; white-space: nowrap; padding: 8px 12px; border-radius: 5px; transition: background 0.3s; }
+    .tata-navbar a:hover { background: #555; }
+    .tata-group-container { margin: 20px auto; padding: 15px; border-radius: 15px; backdrop-filter: blur(20px); background: linear-gradient(135deg, rgba(10, 0, 30, 0.85), rgba(30, 0, 30, 0.85)); max-width: 90%; border: 1px solid lightyellow; }
+    .tata-group-title { text-align: center; font-size: 24px; margin-top: 10px; padding: 10px; color: white; }
+    .tata-channel-container { display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; margin-top: 10px; }
+    .tata-channel-tile { background: white; padding: 15px; border-radius: 12px; box-shadow: 0 4px 8px rgba(0,0,0,0.2); text-align: center; cursor: pointer; width: 180px; transition: transform 0.3s ease-in-out; }
+    .tata-channel-tile:hover { transform: scale(1.05); }
+    .tata-channel-tile img { width: 120px; height: 120px; display: block; margin: 0 auto; border-radius: 10px; }
+    .tata-channel-tile p { margin: 10px 0 0; font-size: 16px; font-weight: bold; }
+    html { scroll-behavior: smooth; }
+    @media (max-width: 600px) {
+        .tata-navbar { justify-content: flex-start; padding: 10px; overflow-x: auto; white-space: nowrap; }
+        .tata-navbar a { font-size: 14px; margin: 5px; padding: 5px 10px; }
+        .tata-channel-tile { width: 140px; padding: 10px; }
+        .tata-channel-tile img { width: 90px; height: 90px; }
+        .tata-group-title { font-size: 20px; }
+    }
+</style>
+
+<div class="tata-navbar" id="tata-navbar"></div>
+<div id="tata-channels"></div>
+
+<script>
+    async function tataFetchChannels() {
+        const response = await fetch('https://binge-channels.vercel.app/tplay.js');
+        const scriptText = await response.text();
+        const tataJsonData = eval(`(() => {${scriptText} return jsonData;})()`);
+        
+        const tokenResponse = await fetch('https://binge-channels.vercel.app/tokens.txt');
+        const tokenText = await tokenResponse.text();
+        const tataTokens = tokenText.match(/value="(.*?)"/g).map(match => match.replace(/value="|"/g, ''));
+
+        const tataGroupedChannels = {};
+        Object.entries(tataJsonData).forEach(([id, channel]) => {
+            if (!tataGroupedChannels[channel.group]) {
+                tataGroupedChannels[channel.group] = [];
+            }
+            tataGroupedChannels[channel.group].push({ id, ...channel });
+        });
+
+        const tataNavbar = document.getElementById('tata-navbar');
+        const tataContainer = document.getElementById('tata-channels');
+
+        Object.entries(tataGroupedChannels).forEach(([group, channels]) => {
+            const tataGroupContainer = document.createElement('div');
+            tataGroupContainer.className = 'tata-group-container';
+            tataGroupContainer.id = group.replace(/\s+/g, '-');
+
+            const tataGroupTitle = document.createElement('h2');
+            tataGroupTitle.className = 'tata-group-title';
+            tataGroupTitle.innerText = group;
+            tataGroupContainer.appendChild(tataGroupTitle);
+
+            const tataChannelContainer = document.createElement('div');
+            tataChannelContainer.className = 'tata-channel-container';
+            
+            channels.forEach(channel => {
+                const tataTile = document.createElement('div');
+                tataTile.className = 'tata-channel-tile';
+                tataTile.innerHTML = `<img src="${channel.logo}" alt="${channel.name}"><p>${channel.name}</p>`;
+                const tataRandomToken = tataTokens[Math.floor(Math.random() * tataTokens.length)];
+                tataTile.onclick = () => window.location.href = `https://binge-channels.vercel.app/tplay.html?id=${channel.id}&token=${tataRandomToken}`;
+                tataChannelContainer.appendChild(tataTile);
+            });
+            tataGroupContainer.appendChild(tataChannelContainer);
+            tataContainer.appendChild(tataGroupContainer);
+
+            const tataNavLink = document.createElement('a');
+            tataNavLink.href = `#${group.replace(/\s+/g, '-')}`;
+            tataNavLink.innerText = group;
+            tataNavbar.appendChild(tataNavLink);
+        });
+    }
+
+    tataFetchChannels();
+</script>
