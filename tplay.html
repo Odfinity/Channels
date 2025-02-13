@@ -19,9 +19,72 @@
             height: 100vh;
             border: none;
         }
+
+                
+                
+    #popup {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .popup-content {
+      background-color: #222;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      width: 300px;
+    }
+
+    .popup-content h2 {
+      margin: 0 0 10px;
+      color: #4d6aff;
+    }
+
+    .popup-content p {
+      margin: 0 0 20px;
+    }
+
+    .popup-content button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .popup-content .join-btn {
+      background-color: #002AFF;
+      color: white;
+    }
+
+    .popup-content .close-btn {
+      background-color: #555;
+      color: white;
+    }
     </style>
 </head>
 <body>
+
+      <div id="popup">
+    <div class="popup-content">
+      <h2>Support Us!</h2>
+      <p>Join our Telegram channel @axtream_bingewav for more updates.</p>
+      <button class="join-btn" onclick="window.open('https://t.me/axtream_bingewav', '_blank')">Join Now</button>
+      <button class="close-btn" onclick="closePopup()">Already Joined</button>
+    </div>
+  </div>
     <script>
         (async function() {
             const redirectURL = "https://t.me/axtream_bingewav";
@@ -62,6 +125,12 @@
                 window.location.href = redirectURL;
             }
         })();
+
+  // Close popup function
+ function closePopup() {
+    const popup = document.getElementById('popup');
+    popup.style.display = 'none';
+  }
     </script>
 </body>
 </html>
