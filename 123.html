@@ -59,7 +59,7 @@
             channels.forEach(channel => {
                 const tataTile = document.createElement('div');
                 tataTile.className = 'tata-channel-tile';
-                tataTile.innerHTML = `<img src="${channel.logo}" alt="${channel.name}"><span>${channel.name}</span>`;
+                tataTile.innerHTML = `<img src="${channel.logo}" alt="${channel.name}"><span style="color: black;">${channel.name}</span>`;
                 const tataRandomToken = tataTokens[Math.floor(Math.random() * tataTokens.length)];
                 tataTile.onclick = () => window.location.href = `https://binge-channels.vercel.app/tplay.html?id=${channel.id}&token=${tataRandomToken}`;
                 tataChannelContainer.appendChild(tataTile);
