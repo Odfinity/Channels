@@ -13,28 +13,38 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #000;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
             color: white;
             font-family: Arial, sans-serif;
             text-align: center;
         }
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            text-align: center;
+        }
         .btn {
             margin: 10px;
-            padding: 10px 20px;
+            padding: 12px 24px;
             font-size: 18px;
             color: white;
-            background-color: #007BFF;
+            background: linear-gradient(135deg, #ff416c, #ff4b2b);
             border: none;
-            border-radius: 5px;
+            border-radius: 25px;
             cursor: pointer;
+            transition: all 0.3s ease;
         }
         .btn:hover {
-            background-color: #0056b3;
+            background: linear-gradient(135deg, #ff4b2b, #ff416c);
+            transform: scale(1.05);
         }
     </style>
 </head>
 <body>
-    <div>
+    <div class="container">
         <h2>Join our Telegram channel to get updated about the latest releases and experience a top-notch entertainment experience.</h2>
         <button class="btn" onclick="window.location.href='https://t.me/axtream_bingewav'">Join Now</button>
         <button class="btn" id="alreadyJoined">Already Joined</button>
