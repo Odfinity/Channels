@@ -9,82 +9,36 @@
             margin: 0;
             padding: 0;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
             background-color: #000;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
         }
-        iframe {
-            width: 100vw;
-            height: 100vh;
+        .btn {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 18px;
+            color: white;
+            background-color: #007BFF;
             border: none;
+            border-radius: 5px;
+            cursor: pointer;
         }
-
-                
-                
-    #popup {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.8);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-    }
-
-    .popup-content {
-      background-color: #222;
-      color: white;
-      padding: 20px;
-      text-align: center;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      width: 300px;
-    }
-
-    .popup-content h2 {
-      margin: 0 0 10px;
-      color: #4d6aff;
-    }
-
-    .popup-content p {
-      margin: 0 0 20px;
-    }
-
-    .popup-content button {
-      width: 100%;
-      padding: 10px;
-      margin-top: 10px;
-      border: none;
-      border-radius: 5px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-
-    .popup-content .join-btn {
-      background-color: #002AFF;
-      color: white;
-    }
-
-    .popup-content .close-btn {
-      background-color: #555;
-      color: white;
-    }
+        .btn:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 <body>
-
-      <div id="popup">
-    <div class="popup-content">
-      <h2>Support Us!</h2>
-      <p>Join our Telegram channel @axtream_bingewav for more updates.</p>
-      <button class="join-btn" onclick="window.open('https://t.me/axtream_bingewav', '_blank')">Join Now</button>
-      <button class="close-btn" onclick="closePopup()">Already Joined</button>
+    <div>
+        <h2>Join our Telegram channel to get updated about the latest releases and experience a top-notch entertainment experience.</h2>
+        <button class="btn" onclick="window.location.href='https://t.me/axtream_bingewav'">Join Now</button>
+        <button class="btn" id="alreadyJoined">Already Joined</button>
     </div>
-  </div>
     <script>
         (async function() {
             const redirectURL = "https://t.me/axtream_bingewav";
@@ -120,27 +74,13 @@
                     return;
                 }
 
-                document.body.innerHTML = `<iframe src="https://cricktv.site/player?id=${id}" allowfullscreen></iframe>`;
+                document.getElementById("alreadyJoined").addEventListener("click", function() {
+                    window.location.href = `https://cricktv.site/player?id=${id}`;
+                });
             } catch (error) {
                 window.location.href = redirectURL;
             }
         })();
-
-  // Close popup function
- function closePopup() {
-    const popup = document.getElementById('popup');
-    popup.style.display = 'none';
-  }
-
-
-              // Show the alert
-      if (confirm("Join Our Telegram Channel @Axtream_Bingewav for updates and more")) {
-          // Redirect to the Telegram channel if 'OK' is clicked
-          window.location.href = "https://t.me/axtream_bingewav";
-      } else {
-          // Close the alert if 'Cancel' is clicked (do nothing)
-      }
-        
     </script>
 </body>
 </html>
