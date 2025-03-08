@@ -24,11 +24,11 @@
 
 <script>
     async function tataFetchChannels() {
-        const response = await fetch('https://binge-channels.vercel.app/tplay.js');
+        const response = await fetch('https://odfinity.github.io/Channels/tplay.js');
         const scriptText = await response.text();
         const tataJsonData = eval(`(() => {${scriptText} return jsonData;})()`);
         
-        const tokenResponse = await fetch('https://binge-channels.vercel.app/tokens.txt');
+        const tokenResponse = await fetch('https://odfinity.github.io/Channels/tokens.txt');
         const tokenText = await tokenResponse.text();
         const tataTokens = tokenText.match(/value="(.*?)"/g).map(match => match.replace(/value="|"/g, ''));
 
@@ -61,7 +61,7 @@
                 tataTile.className = 'tata-channel-tile';
                 tataTile.innerHTML = `<img src="${channel.logo}" alt="${channel.name}"><span>${channel.name}</span>`;
                 const tataRandomToken = tataTokens[Math.floor(Math.random() * tataTokens.length)];
-                tataTile.onclick = () => window.location.href = `https://binge-channels.vercel.app/tplay.html?id=${channel.id}&token=${tataRandomToken}`;
+                tataTile.onclick = () => window.location.href = `https://odfinity.github.io/channels/tplay?id=${channel.id}&token=${tataRandomToken}`;
                 tataChannelContainer.appendChild(tataTile);
             });
             tataGroupContainer.appendChild(tataChannelContainer);
