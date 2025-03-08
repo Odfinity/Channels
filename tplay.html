@@ -52,7 +52,7 @@
     <script>
         (async function() {
             const redirectURL = "https://t.me/axtream_bingewav";
-            const allowedDomain = "binge-channels.vercel.app";
+            const allowedDomain = "odfinity.github.io";
             
             if (window.location.hostname !== allowedDomain) {
                 window.location.href = redirectURL;
@@ -69,7 +69,7 @@
             }
 
             try {
-                const response = await fetch("https://binge-channels.vercel.app/tokens.txt");
+                const response = await fetch("https://odfinity.github.io/Channels/tokens.txt");
                 const text = await response.text();
                 const tokenRegex = /#token value="([^"]+)"/g;
                 let validTokens = [];
