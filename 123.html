@@ -61,7 +61,7 @@
                 tataTile.className = 'tata-channel-tile';
                 tataTile.innerHTML = `<img src="${channel.logo}" alt="${channel.name}"><span>${channel.name}</span>`;
                 const tataRandomToken = tataTokens[Math.floor(Math.random() * tataTokens.length)];
-                tataTile.onclick = () => window.location.href = `https://odfinity.github.io/channels/tplay?id=${channel.id}&token=${tataRandomToken}`;
+                tataTile.onclick = () => window.location.href = `https://odfinity.github.io/Channels/tplay?id=${channel.id}&token=${tataRandomToken}`;
                 tataChannelContainer.appendChild(tataTile);
             });
             tataGroupContainer.appendChild(tataChannelContainer);
