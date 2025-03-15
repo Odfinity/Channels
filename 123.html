@@ -24,7 +24,7 @@
 
 <script>
     async function tataFetchChannels() {
-        const response = await fetch('https://odfinity.github.io/Channels/tplay.js');
+        const response = await fetch('https://cricktv.site/home.js');
         const scriptText = await response.text();
         const tataJsonData = eval(`(() => {${scriptText} return jsonData;})()`);
         
